@@ -1,0 +1,10 @@
+.devcontainer/*/
+!.devcontainer/*/devcontainer.json
+!.devcontainer/*/Dockerfile
+!.devcontainer/*/compose.yaml
+pgdata/
+vendor/
+node_modules/
+__pycache__/
+.env
+.DS_Store
