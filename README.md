@@ -4,14 +4,10 @@ Podman (または Docker) と VS Code Dev Containers を用いた、**認証機�
 
 ## 特長
 
-* **多言語対応**: PHP (Laravel) / Node.js (Next.js) / Go / Python / Rust の5つの環境を同時に、または個別に利用可能。
-* **統合認証基盤**: **Authentik** を標準搭載し、各言語でのトークン認証（JWT）の実装例を提供。
-* **充実したインフラ**:
-  * PostgreSQL 17
-  * Redis 7
-  * Authentik (ID Provider)
-  * 管理ツール: Redis Commander, pgAdmin 4, Swagger UI/Editor
-* **簡単管理**: PowerShellスクリプトで全環境の一括起動・停止が可能。
+* **All-in-One開発環境**: 1つのコンテナで Go, Node.js, PHP, Python, Rust のすべての開発が可能。
+* **Docker-outside-of-Docker (DooD)**: 開発コンテナ内からホストのDocker(Podman)を操作し、アプリコンテナを起動できます。
+* **統合認証基盤**: **Authentik** を標準搭載。
+* **充実したインフラ**: PostgreSQL 17, Redis 7, 管理ツール群 (Redis Commander, pgAdmin 4, Swagger UI/Editor)。
 
 ## 前提条件
 
@@ -31,32 +27,33 @@ Podmanを使用してコンテナをビルドする場合、以下の環境変�
 
 ## クイックスタート
 
-リポジトリ直下のPowerShellスクリプトを使用して、すべての環境を一括で管理できます。
+### 1. 開発環境の起動
 
-### 1. 起動
+VS Code でこのフォルダを開き、`F1` → `Dev Containers: Reopen in Container` を選択します。
+**"Fullstack Dev Environment"** が起動し、すべての言語ツールが利用可能な状態になります。
+
+### 2. インフラとアプリの起動
+
+DevContainer内のターミナル、またはホストのPowerShellから以下のスクリプトを実行します。
 
 ```powershell
 ./start_dev.ps1
 ```
-すべての言語環境とインフラサービス（DB, Redis, Authentik）が起動します。
+すべての言語環境（アプリコンテナ）とインフラサービス（DB, Redis, Authentik）が起動します。
 
-### 2. 依存関係のインストール (初回のみ)
-
-PHP (Composer) や Go (Modules) の依存関係をインストールします。
+### 3. 依存関係のインストール (初回のみ)
 
 ```powershell
 ./setup_deps.ps1
 ```
 
-### 3. 停止
+### 4. 停止
 
 ```powershell
 ./stop_dev.ps1
 ```
 
 ## ポートマッピング一覧
-
-各言語環境にはインデックス番号が割り当てられており、ポート番号の末尾で識別できます。
 
 | 環境 | Index | アプリ (Host:Container) | DB (Host:5432) | Redis (Host:6379) | ツール群 (RedisCmd/Swagger/Gateway/PgAdmin) |
 | :--- | :---: | :--- | :--- | :--- | :--- |
@@ -73,29 +70,15 @@ PHP (Composer) や Go (Modules) の依存関係をインストールします。
 *   **Redis Commander**: [http://localhost:8002](http://localhost:8002)
 *   **Gateway**: [http://localhost:8081](http://localhost:8081)
 
-## Authentik & 認証デモ
-
-本キットには、Authentikを使用したBearerトークン認証のデモが含まれています。
-
-### Authentik 初期設定
-1.  [http://localhost:9000/if/flow/initial-setup/](http://localhost:9000/if/flow/initial-setup/) にアクセス。
-2.  `akadmin` ユーザーのパスワードを設定。
-3.  [http://localhost:9000/if/admin/](http://localhost:9000/if/admin/) から管理画面にログイン。
-
-### 認証デモの確認
-Go, PHP, Rust 環境には `/protected` エンドポイントが実装されており、Bearerトークンの検証ロジックが含まれています。
-
-1.  Authentikでトークンを発行（または任意のJWTを用意）。
-2.  以下のURLに `Authorization: Bearer <TOKEN>` ヘッダーを付けてリクエスト。
-    *   **Go**: `http://localhost:9001/protected`
-    *   **PHP**: `http://localhost:9003/protected`
-    *   **Rust**: `http://localhost:9005/protected`
-
 ## ディレクトリ構成
 
 ```
 .
-├── .devcontainer/          # 各言語のDevContainer設定 (compose.yaml含む)
+├── .devcontainer/          # 開発環境 (All-in-One) 設定
+│   ├── devcontainer.json
+│   ├── Dockerfile
+│   └── compose.yaml
+├── services/               # アプリ実行用Docker設定
 │   ├── go/
 │   ├── node-nextjs/
 │   ├── php-laravel/
@@ -106,14 +89,9 @@ Go, PHP, Rust 環境には `/protected` エンドポイントが実装されて�
 ├── php_workspace/          # PHP ソースコード
 ├── py_workspace/           # Python ソースコード
 ├── rust_workspace/         # Rust ソースコード
-├── initdb/                 # DB初期化SQL (Authentik用含む)
+├── initdb/                 # DB初期化SQL
 ├── compose.base.yaml       # 共通インフラ定義
 ├── start_dev.ps1           # 一括起動スクリプト
 ├── stop_dev.ps1            # 一括停止スクリプト
 └── setup_deps.ps1          # 依存関係インストールスクリプト
 ```
-
-## 開発のヒント
-
-* **コンテナ内開発**: VS Codeで「Dev Containers: Reopen in Container」を使用すると、特定の言語環境のコンテナに入って開発できます。
-* **ポート設定**: アプリケーションはコンテナ内で必ず **8080** 番ポートでリッスンしてください。

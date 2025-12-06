@@ -1,0 +1,20 @@
+time="2025-12-06T09:58:12+09:00" level=warning msg="C:\\Users\\super\\00_works\\podman-fullstack-devcontainer-kit\\.devcontainer\\compose.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-12-06T09:58:12+09:00" level=warning msg="C:\\Users\\super\\00_works\\podman-fullstack-devcontainer-kit\\infrastructure\\compose.base.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-12-06T09:58:12+09:00" level=warning msg="C:\\Users\\super\\00_works\\podman-fullstack-devcontainer-kit\\infrastructure\\compose.data.redis.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-12-06T09:58:12+09:00" level=warning msg="C:\\Users\\super\\00_works\\podman-fullstack-devcontainer-kit\\infrastructure\\compose.data.postgres.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-12-06T09:58:12+09:00" level=warning msg="C:\\Users\\super\\00_works\\podman-fullstack-devcontainer-kit\\infrastructure\\compose.app.authentik.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container podman-fullstack-devcontainer-kit_devcontainer-db-1  Running
+ Container a034c73d477d_podman-fullstack-devcontainer-kit_devcontainer-swagger-editor-1  Running
+ Container podman-fullstack-devcontainer-kit_devcontainer-devbox-1  Running
+ Container 4a3a5dc89f35_podman-fullstack-devcontainer-kit_devcontainer-swagger-ui-1  Running
+ Container podman-fullstack-devcontainer-kit_devcontainer-redis-1  Running
+ Container podman-fullstack-devcontainer-kit_devcontainer-gateway-1  Starting
+ Container podman-fullstack-devcontainer-kit_devcontainer-pgadmin-1  Starting
+ Container podman-fullstack-devcontainer-kit_devcontainer-redisCommander-1  Starting
+ Container podman-fullstack-devcontainer-kit_devcontainer-authentik-server-1  Starting
+ Container podman-fullstack-devcontainer-kit_devcontainer-authentik-worker-1  Starting
+ Container podman-fullstack-devcontainer-kit_devcontainer-pgadmin-1  Started
+ Container podman-fullstack-devcontainer-kit_devcontainer-authentik-server-1  Started
+ Container podman-fullstack-devcontainer-kit_devcontainer-authentik-worker-1  Started
+ Container podman-fullstack-devcontainer-kit_devcontainer-redisCommander-1  Started
+Error response from daemon: cannot listen on the TCP port: listen tcp4 :8081: bind: address already in use

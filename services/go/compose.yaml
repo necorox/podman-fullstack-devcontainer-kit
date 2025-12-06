@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  go-app:
+    build:
+      context: ../..
+      dockerfile: services/go/Dockerfile
+    networks:
+      - devnet
+    volumes:
+      - ../../go_workspace:/workspace
+    ports:
+      - "9001:8080"
+    command: sleep infinity
+    depends_on:
+      - db
+      - redis
+
+  # Override shared services ports
+  db:
+    ports:
+      - "54321:5432"
+
+  redis:
+    ports:
+      - "63791:6379"
+
+  redisCommander:
+    ports:
+      - "9011:8081"
+
+  swagger-editor:
+    ports:
+      - "9021:8080"
+
+  gateway:
+    ports:
+      - "9031:80"
+
+  pgadmin:
+    ports:
+      - "9041:80"

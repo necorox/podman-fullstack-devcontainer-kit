@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  php-app:
+    build:
+      context: ../..
+      dockerfile: services/php-laravel/Dockerfile
+    networks:
+      - devnet
+    volumes:
+      - ../../php_workspace:/workspace
+    ports:
+      - "9003:8080"
+    command: sleep infinity
+    depends_on:
+      - db
+      - redis
+
+  # Override shared services ports
+  db:
+    ports:
+      - "54323:5432"
+
+  redis:
+    ports:
+      - "63793:6379"
+
+  redisCommander:
+    ports:
+      - "9013:8081"
+
+  swagger-editor:
+    ports:
+      - "9023:8080"
+
+  gateway:
+    ports:
+      - "9033:80"
+
+  pgadmin:
+    ports:
+      - "9043:80"

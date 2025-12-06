@@ -1,0 +1,17 @@
+{
+    "name": "Go",
+    "dockerComposeFile": [
+        "../../compose.base.yaml",
+        "compose.yaml"
+    ],
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.go"
+            ]
+        }
+    },
+    "remoteUser": "root"
+}

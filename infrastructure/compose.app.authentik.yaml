@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  authentik-server:
+    image: ghcr.io/goauthentik/server:2024.10.1
+    command: server
+    environment:
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: db
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+      AUTHENTIK_POSTGRESQL__PASSWORD: authentik_password
+      AUTHENTIK_SECRET_KEY: "generate_a_secure_random_key_here_for_production"
+      # AUTHENTIK_ERROR_REPORTING__ENABLED: "true"
+    volumes:
+      - ../authentik/media:/media
+      - ../authentik/custom-templates:/templates
+    ports:
+      - "9000:9000"
+      - "9443:9443"
+    depends_on:
+      - db
+      - redis
+    networks:
+      - devnet
+
+  authentik-worker:
+    image: ghcr.io/goauthentik/server:2024.10.1
+    command: worker
+    environment:
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: db
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+      AUTHENTIK_POSTGRESQL__PASSWORD: authentik_password
+      AUTHENTIK_SECRET_KEY: "generate_a_secure_random_key_here_for_production"
+    # user: root
+    volumes:
+      - ../authentik/media:/media
+      - ../authentik/certs:/certs
+      - ../authentik/custom-templates:/templates
+    depends_on:
+      - db
+      - redis
+    networks:
+      - devnet

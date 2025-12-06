@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  rust-app:
+    build:
+      context: ../..
+      dockerfile: services/rust/Dockerfile
+    networks:
+      - devnet
+    volumes:
+      - ../../rust_workspace:/workspace
+    ports:
+      - "9005:8080"
+    command: sleep infinity
+    depends_on:
+      - db
+      - redis
+
+  # Override shared services ports
+  db:
+    ports:
+      - "54325:5432"
+
+  redis:
+    ports:
+      - "63795:6379"
+
+  redisCommander:
+    ports:
+      - "9015:8081"
+
+  swagger-editor:
+    ports:
+      - "9025:8080"
+
+  gateway:
+    ports:
+      - "9035:80"
+
+  pgadmin:
+    ports:
+      - "9045:80"

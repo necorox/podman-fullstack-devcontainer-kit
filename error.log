@@ -1,0 +1,17 @@
+time="2025-12-06T09:57:24+09:00" level=warning msg="C:\\Users\\super\\00_works\\podman-fullstack-devcontainer-kit\\.devcontainer\\compose.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-12-06T09:57:24+09:00" level=warning msg="C:\\Users\\super\\00_works\\podman-fullstack-devcontainer-kit\\infrastructure\\compose.base.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-12-06T09:57:24+09:00" level=warning msg="C:\\Users\\super\\00_works\\podman-fullstack-devcontainer-kit\\infrastructure\\compose.data.redis.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-12-06T09:57:24+09:00" level=warning msg="C:\\Users\\super\\00_works\\podman-fullstack-devcontainer-kit\\infrastructure\\compose.data.postgres.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-12-06T09:57:24+09:00" level=warning msg="C:\\Users\\super\\00_works\\podman-fullstack-devcontainer-kit\\infrastructure\\compose.app.authentik.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container podman-fullstack-devcontainer-kit_devcontainer-gateway-1  Creating
+ Container podman-fullstack-devcontainer-kit_devcontainer-devbox-1  Recreate
+ Container podman-fullstack-devcontainer-kit_devcontainer-swagger-ui-1  Stopping
+ Container podman-fullstack-devcontainer-kit_devcontainer-db-1  Recreate
+ Container podman-fullstack-devcontainer-kit_devcontainer-redisCommander-1  Creating
+ Container podman-fullstack-devcontainer-kit_devcontainer-swagger-editor-1  Stopping
+ Container podman-fullstack-devcontainer-kit_devcontainer-swagger-ui-1  Stopped
+ Container podman-fullstack-devcontainer-kit_devcontainer-swagger-ui-1  Removing
+ Container podman-fullstack-devcontainer-kit_devcontainer-gateway-1  Error response from daemon: container create: statfs /mnt/c/Users/super/00_works/podman-fullstack-devcontainer-kit/.devcontainer/nginx/nginx.conf: no such file or directory
+ Container podman-fullstack-devcontainer-kit_devcontainer-swagger-ui-1  Error while Removing
+ Container podman-fullstack-devcontainer-kit_devcontainer-swagger-editor-1  Error while Stopping
+Error response from daemon: container create: statfs /mnt/c/Users/super/00_works/podman-fullstack-devcontainer-kit/.devcontainer/nginx/nginx.conf: no such file or directory
