@@ -43,5 +43,6 @@
             ]
         }
     },
-    "remoteUser": "vscode"
+    "remoteUser": "vscode",
+    "postStartCommand": "bash .devcontainer/check-versions.sh"
 }
